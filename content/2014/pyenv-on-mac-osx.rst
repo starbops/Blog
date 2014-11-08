@@ -11,5 +11,8 @@
 :email: starbops@gmail.com
 :summary: I need a handful tool to manage my Python versions and also packages.
 
-https://github.com/yyuu/pyenv/wiki/Common-build-problems
-https://github.com/yyuu/pyenv/issues/22
+- `Common build problems`__
+- `3.2 installation fails with SSL error`__
+
+.. __: https://github.com/yyuu/pyenv/wiki/Common-build-problems
+.. __: https://github.com/yyuu/pyenv/issues/22

@@ -58,7 +58,7 @@ Buffering for printf
 
 Consider the following C code
 
-.. code-block:: text
+.. code-block:: c
 
     #include <stdio.h>
     #include <stdlib.h>

@@ -14,7 +14,7 @@
 GNU Debugger Skill
 ==================
 
-.. code-block:: text
+.. code-block:: sh
 
     (gdb) disassemble foo
     (gdb) b *foo+40
@@ -30,19 +30,19 @@ Buffer OverFlow
 
 Disable stack guard
 
-.. code-block:: text
+.. code-block:: sh
 
     gcc -fno-stack-protector
 
 Disable data execution prevention
 
-.. code-block:: text
+.. code-block:: sh
 
     gcc -z execstack
 
 Disable address space layout randomization
 
-.. code-block:: text
+.. code-block:: sh
 
     echo 0 > /proc/sys/kernel/randomize_va_space
 

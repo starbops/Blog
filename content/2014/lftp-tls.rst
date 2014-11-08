@@ -17,16 +17,21 @@ Installation
 FreeBSD
 -------
 
-``portmaster ftp/lftp``
 Enable the TLS by checking the box in the configure dialog
+
+.. code-block:: sh
+
+    # portmaster ftp/lftp
 
 Arch Linux
 ----------
 
-``abs``
-``mkdir ~/abs``
-``cp -r /var/abs/lftp ~/abs``
-``cd ~/abs/lftp``
+.. code-block:: sh
+
+    $ abs
+    $ mkdir ~/abs
+    $ cp -r /var/abs/lftp ~/abs
+    $ cd ~/abs/lftp
 
 We need to modify the PKGBUILD of lftp
 
@@ -46,8 +51,13 @@ We need to modify the PKGBUILD of lftp
     }
     ...
 
-``makepkg -s``
-``pacman -U lftp-4.5.5-1-x86_64.pkg.tar.xz``
+Compile our patched source code of lftp. After that, install with the package which we
+built.
+
+.. code-block:: sh
+
+    $ makepkg -s``
+    # pacman -U lftp-4.5.5-1-x86_64.pkg.tar.xz``
 
 Mac OS X
 --------

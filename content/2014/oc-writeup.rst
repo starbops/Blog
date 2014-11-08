@@ -15,7 +15,7 @@
 Using IDA Pro's impressive F5 decompilation, we discover sub_80485D7() is the
 most interesting part
 
-.. code-block:: text
+.. code-block:: c
 
     ......
     v6 = ptrace(0, 0, 1, 0);
@@ -43,7 +43,7 @@ to dest. But dest is not used anymore (suspicious). Just keep in mind.
 
 According to the text file (linux-anti-debugging.txt) from the hint
 
-.. code-block:: text
+.. code-block:: c
 
     int main()
     {
@@ -63,7 +63,7 @@ suffrage in Hong Kong just kidding. :p" while not being debugged and show
 Because dest can only contain 16 char, more than 16 char being copied to dest
 will cause the variable, src, being overwritten
 
-.. code-block:: text
+.. code-block:: nasm
 
     0804A048    ; char dest[16]
     0804A048    dest        db 10h dup(?)

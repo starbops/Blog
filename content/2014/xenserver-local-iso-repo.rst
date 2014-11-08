@@ -11,4 +11,6 @@
 :email: starbops@gmail.com
 :summary: XenServer does not have a local ISO repository by default.
 
-http://wiki.hetzner.de/index.php/Citrix_XenServer/en#Embed_a_local_ISO_Library
+- `Embed A Local ISO Library`__
+
+.. __: http://wiki.hetzner.de/index.php/Citrix_XenServer/en#Embed_a_local_ISO_Library

@@ -34,7 +34,7 @@ Unfortunately, the key subroutine cannot be decompile. Because there is a weird
 ``je`` at 0x08048AA5. It made IDA Pro unable to decompile that piece of code (I
 copied the code generate from objdump and paste it below, not from IDA Pro)
 
-.. code-block:: text
+.. code-block:: nasm
 
     8048a9a:       c7 45 ec 01 00 00 00    mov    DWORD PTR [ebp-0x14],0x1
     8048aa1:       83 7d ec 00             cmp    DWORD PTR [ebp-0x14],0x0
@@ -44,7 +44,7 @@ copied the code generate from objdump and paste it below, not from IDA Pro)
 
 So I patch the code by stuffing ``nop`` to replace ``je 8048ab7``
 
-.. code-block:: text
+.. code-block:: nasm
 
     8048a9a:       c7 45 ec 01 00 00 00    mov    DWORD PTR [ebp-0x14],0x1
     8048aa1:       83 7d ec 00             cmp    DWORD PTR [ebp-0x14],0x0
@@ -62,7 +62,7 @@ By tracing the pseudo code, we know that there are two key points in this
 executable. They are all about how the password user typed is XORed. One of
 them is in sub_8048C1C()
 
-.. code-block:: text
+.. code-block:: c
 
     ......
     seed = time(0)
@@ -73,7 +73,7 @@ them is in sub_8048C1C()
 
 The other is in sub_80488FD()
 
-.. code-block:: text
+.. code-block:: c
 
     ......
     fgets(s, 32, stdin);

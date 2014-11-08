@@ -15,7 +15,7 @@ I found that there are great amount of records about SSH bruteforce from the
 Internet in logs. And RouterOS default allow many management ports. To enhance
 security of RB750GL, we have to disable some management ports
 
-.. code-block:: text
+.. code-block:: sh
 
     /ip service disable <number>
 

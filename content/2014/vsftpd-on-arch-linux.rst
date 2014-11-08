@@ -18,13 +18,13 @@ Installation
 
 Install vsftpd via pacman
 
-.. code-block:: text
+.. code-block:: sh
 
     # pacman -S vsftpd
 
 Generate an SSL cert
 
-.. code-block:: text
+.. code-block:: sh
 
     # cd /etc/ssl/certs
     # openssl req -x509 -nodes -days 7300 -newkey rsakey:2048 -keyout /etc/ssl/certs/vsftpd.pem -out /etc/ssl/certs/vsftpd.pem
@@ -58,7 +58,7 @@ Make sure the lines below are presented in the ``/etc/vsftpd.conf`` configure fi
 
 Fire up vsftpd and make it start at boot time
 
-.. code-block:: text
+.. code-block:: sh
 
     # systemctl enable vsftpd.service
     # systemctl start vsftpd.service
@@ -71,7 +71,7 @@ Port 21 Occupied by System Default ftpd.service
 
 In some cases the system provided ftpd.service will be activated. To stop it
 
-.. code-block:: text
+.. code-block:: sh
 
     # systemctl stop ftpd.service
     # systemctl disable ftpd.service

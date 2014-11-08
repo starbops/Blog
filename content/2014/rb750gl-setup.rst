@@ -50,7 +50,7 @@ Connect with Internet
 
 Configure IP address, gateway and DNS server
 
-.. code-block:: text
+.. code-block:: sh
 
     /ip address add address=10.113.215.193/24 interface=ether1-gateway
     /ip route add dst-address=0.0.0.0/0 gateway=ether1-gateway
@@ -58,7 +58,7 @@ Configure IP address, gateway and DNS server
 
 To test connectivity, try to do this
 
-.. code-block:: text
+.. code-block:: sh
 
     /tool flood-ping 8.8.8.8
 
@@ -67,13 +67,13 @@ NTP (Network Time Protocol)
 
 Synchronize time with 3.asia.pool.ntp.org using NTP
 
-.. code-block:: text
+.. code-block:: sh
 
     /system ntp client set enabled=yes mode=unicast primary-ntp=77.235.14.49 secondary-ntp=212.26.18.43
 
 To verify that NTP client is running
 
-.. code-block:: text
+.. code-block:: sh
 
     /system ntp client print
 
@@ -82,20 +82,20 @@ Upgrade RouterOS
 
 Check what version RB750GL is running currently
 
-.. code-block:: text
+.. code-block:: sh
 
     /system package update print
 
 Update RouterOS from 5.25 to 5.26
 
-.. code-block:: text
+.. code-block:: sh
 
     /system package update check-for-updates
     /system package update download
 
 By issuing ``/system package update print`` you'll see the percentage of download progress. When it is done, upgrade the OS
 
-.. code-block:: text
+.. code-block:: sh
 
     /system package update upgrade
 
@@ -119,7 +119,7 @@ DHCP (Dynamic Host Configuration Protocol) Server
 
 Giving XenServer a static IP
 
-.. code-block:: text
+.. code-block:: sh
 
     /ip dhcp-server lease add address=192.168.88.154 mac-address=f4:6d:04:79:80:ff
 
@@ -128,7 +128,7 @@ Firewall
 
 There were bunch of rules set already. If there were not, you can try these
 
-.. code-block:: text
+.. code-block:: sh
 
     /ip firewall filter add action=accept chain=input comment="default configuration" disabled=no protocol=icmp
     /ip firewall filter add action=accept chain=input comment="default configuration" connection-state=established disabled=no
@@ -146,14 +146,14 @@ NAT (Network Address Translation)
 To allow VMs inside LAN have full access to the Internet, one thing to do is
 masquerade packets send to the outer network
 
-.. code-block:: text
+.. code-block:: sh
 
     /ip firewall nat add action=masquerade chain=srcnat comment="default configuration" disabled=no out-interface=ether1-gateway
 
 If you want remote client to access internal services, e.g. SSH, HTTP, RDP, etc.,
 destination NAT is needed
 
-.. code-block:: text
+.. code-block:: sh
 
     /ip firewall nat add action=dst-nat chain=dstnat disabled=no dst-port=2222 in-interface=ether1-gateway protocol=tcp to-addresses=192.168.88.155 to-ports=22
 
@@ -163,7 +163,7 @@ VPN (Virtual Private Network) Server
 Setting up PPTP (Point-to-Point Tunneling Protocol) server. First, we need to
 allocate a IP pool for VPN clients
 
-.. code-block:: text
+.. code-block:: sh
 
     /ip pool add name=pptp_pool1 range=192.168.88.5-192.168.88.9
 
@@ -174,13 +174,13 @@ allocate a IP pool for VPN clients
 After the setting was done, the connection of VPN should be allowed through the
 firewall
 
-.. code-block:: text
+.. code-block:: sh
 
     /ip firewall filter add chain=input in-interface=ether1-gateway protocol=tcp dst-port=1723 action=accept
 
 The connection states could be checked throuth this command
 
-.. code-block:: text
+.. code-block:: sh
 
     /interface pptp-server monitor
 
@@ -188,7 +188,7 @@ Now, VPN clients can only ping RB750GL's LAN IP. If you want to communicate
 with other PCs or servers in the LAN, one thing you have to do is enabling
 proxy ARP on the local port
 
-.. code-block:: text
+.. code-block:: sh
 
     /interface ethernet set ether2-master-local arp=proxy-arp
 

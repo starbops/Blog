@@ -17,7 +17,7 @@ Before Started
 Writable Filesystem
 -------------------
 
-.. code-block:: text
+.. code-block:: sh
 
     # mkdir /tmp/etc
     # mount_unionfs /tmp/etc /etc
@@ -25,7 +25,7 @@ Writable Filesystem
 Connectivity
 ------------
 
-.. code-block:: text
+.. code-block:: sh
 
     # ifconfig em0 140.113.102.184 netmask 255.255.255.224
     # route add default 140.113.102.190
@@ -34,7 +34,7 @@ Connectivity
 SSHD on Duty
 ------------
 
-.. code-block:: text
+.. code-block:: sh
 
     # passwd
     # echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config
@@ -43,7 +43,7 @@ SSHD on Duty
 Remote Installation
 ===================
 
-.. code-block:: text
+.. code-block:: sh
 
     # gpart destroy -F /dev/da0
     # gpart create -s GPT /dev/da0
@@ -63,7 +63,7 @@ Remote Installation
 
     # chroot /mnt
 
-.. code-block:: text
+.. code-block:: sh
 
     # passwd
     # echo 'nameserver 8.8.8.8' > /etc/resolv.conf
@@ -108,13 +108,13 @@ After Installation
 You need to console login using root if you did not create normal user before
 you reboot the machine
 
-.. code-block:: text
+.. code-block:: sh
 
     # pw useradd starbops -G wheel -m -s /bin/sh
 
 Download ports tree if you want to install software through ports
 
-.. code-block:: text
+.. code-block:: sh
 
     # portsnap fetch extract
 
