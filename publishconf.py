@@ -14,11 +14,12 @@ SITEURL = 'http://blog.zespre.com'
 RELATIVE_URLS = False
 
 FEED_ALL_ATOM = 'feeds/all.atom.xml'
-CATEGORY_FEED_ATOM = 'feeds/%s.atom.xml'
+CATEGORY_FEED_ATOM = 'feeds/category/%s.atom.xml'
+TAG_FEED_ATOM = 'feeds/tag/%s.atom.xml'
 
 DELETE_OUTPUT_DIRECTORY = True
 
 # Following items are often useful when publishing
 
-#DISQUS_SITENAME = ""
-#GOOGLE_ANALYTICS = ""
+DISQUS_SITENAME = "zespre"
+GOOGLE_ANALYTICS = "UA-56544554-1"
