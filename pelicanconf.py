@@ -64,6 +64,8 @@ NEWEST_FIRST_ARCHIVES = False
 THEME = 'themes/pure'
 COVER_IMG_URL = 'http://i.imgur.com/iwt5X0U.jpg'
 TAGLINE = 'Sometimes, we generate bugs'
+MENUITEMS = (('Archives', 'archives.html'),
+             ('About', 'pages/about.html'),)
 
 # Plugins
 
