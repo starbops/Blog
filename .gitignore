@@ -56,5 +56,8 @@ target/
 # PyEnv
 .python-version
 
-# Pelican output directory
+# Pelican stuff
 output/
+cache/
+pelican.pid
+srv.pid
