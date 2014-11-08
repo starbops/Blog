@@ -3,6 +3,7 @@
 from __future__ import unicode_literals
 
 AUTHOR = u'Zespre Schmidt'
+SITEURL = 'http://blog.zespre.com'
 SITENAME = u"Zespre's Blog"
 SITEURL = ''
 
@@ -13,9 +14,10 @@ TIMEZONE = 'Asia/Taipei'
 DEFAULT_LANG = u'en'
 
 # Feed generation is usually not desired when developing
-FEED_ALL_ATOM = None
-CATEGORY_FEED_ATOM = None
+FEED_ALL_ATOM = 'feeds/all.atom.xml'
 TRANSLATION_FEED_ATOM = None
+CATEGORY_FEED_ATOM = 'feeds/category/%s.atom.xml'
+TAG_FEED_ATOM = 'feeds/tag/%s.atom.xml'
 AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 
@@ -33,7 +35,7 @@ SOCIAL = (('github', 'https://github.com/starbops'),
 DEFAULT_PAGINATION = 10
 
 # Uncomment following line if you want document-relative URLs when developing
-RELATIVE_URLS = True
+RELATIVE_URLS = False
 
 # Formatting for dates
 
@@ -66,5 +68,8 @@ TAGLINE = 'Sometimes, we generate bugs'
 
 # Plugins
 
-PLUGIN_PATH = 'plugins'
+PLUGIN_PATHS = 'plugins'
 PLUGINS = ['gravatar']
+
+DISQUS_SITENAME = "zespre"
+GOOGLE_ANALYTICS = "UA-56544554-1"
