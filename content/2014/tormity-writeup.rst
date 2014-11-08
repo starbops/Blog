@@ -87,7 +87,7 @@ The hint told me that I should connect to the webpage with Hong Kong IP. To
 satisfy this restriction and to use python script doing this boring job for me,
 Tor must be setup.
 
-First we need to install Tor via Homebrew ``$ brew install tor``. After the
+First we need to install Tor via Homebrew ``brew install tor``. After the
 installation was done, you will see the caveats shown on the terminal
 
 .. code-block:: sh
@@ -118,9 +118,9 @@ login and using SOCKS proxy
 
 .. code-block:: sh
 
-    $ pyenv virtualenv 2.7.8 secprog-2.7.8
-    $ pyenv local secprog-2.7.8
-    $ pip install mechanize PySocks
+    pyenv virtualenv 2.7.8 secprog-2.7.8
+    pyenv local secprog-2.7.8
+    pip install mechanize PySocks
 
 Key Points
 ----------

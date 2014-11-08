@@ -20,15 +20,15 @@ Install vsftpd via pacman
 
 .. code-block:: sh
 
-    # pacman -S vsftpd
+    pacman -S vsftpd
 
 Generate an SSL cert
 
 .. code-block:: sh
 
-    # cd /etc/ssl/certs
-    # openssl req -x509 -nodes -days 7300 -newkey rsakey:2048 -keyout /etc/ssl/certs/vsftpd.pem -out /etc/ssl/certs/vsftpd.pem
-    # chmod 600 /etc/ssl/certs/vsftpd.pem
+    cd /etc/ssl/certs
+    openssl req -x509 -nodes -days 7300 -newkey rsakey:2048 -keyout /etc/ssl/certs/vsftpd.pem -out /etc/ssl/certs/vsftpd.pem
+    chmod 600 /etc/ssl/certs/vsftpd.pem
 
 Make sure the lines below are presented in the ``/etc/vsftpd.conf`` configure file an uncommented
 
@@ -60,8 +60,8 @@ Fire up vsftpd and make it start at boot time
 
 .. code-block:: sh
 
-    # systemctl enable vsftpd.service
-    # systemctl start vsftpd.service
+    systemctl enable vsftpd.service
+    systemctl start vsftpd.service
 
 Trouble Shooting
 ================
@@ -73,8 +73,8 @@ In some cases the system provided ftpd.service will be activated. To stop it
 
 .. code-block:: sh
 
-    # systemctl stop ftpd.service
-    # systemctl disable ftpd.service
+    systemctl stop ftpd.service
+    systemctl disable ftpd.service
 
 GnuTLS Error -15: An Unexpected TLS Packet Was Received
 -------------------------------------------------------

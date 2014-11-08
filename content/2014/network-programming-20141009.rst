@@ -15,7 +15,7 @@
     - pipe: the write end has been closed
     - file: end of file
 - create pipe 時 read 的 FD 先於 write 的 FD, e.g. read = 3 and write = 4
-- ``% cat f1 | sort | lpr``
+- ``cat f1 | sort | lpr``
     - csh
         - csh fork 3 children
         - csh create 2 pipes

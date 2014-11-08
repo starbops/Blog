@@ -21,17 +21,17 @@ Enable the TLS by checking the box in the configure dialog
 
 .. code-block:: sh
 
-    # portmaster ftp/lftp
+    portmaster ftp/lftp
 
 Arch Linux
 ----------
 
 .. code-block:: sh
 
-    $ abs
-    $ mkdir ~/abs
-    $ cp -r /var/abs/lftp ~/abs
-    $ cd ~/abs/lftp
+    abs
+    mkdir ~/abs
+    cp -r /var/abs/lftp ~/abs
+    cd ~/abs/lftp
 
 We need to modify the PKGBUILD of lftp
 
@@ -56,8 +56,8 @@ built.
 
 .. code-block:: sh
 
-    $ makepkg -s``
-    # pacman -U lftp-4.5.5-1-x86_64.pkg.tar.xz``
+    makepkg -s``
+    pacman -U lftp-4.5.5-1-x86_64.pkg.tar.xz``
 
 Mac OS X
 --------

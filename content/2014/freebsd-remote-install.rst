@@ -19,56 +19,56 @@ Writable Filesystem
 
 .. code-block:: sh
 
-    # mkdir /tmp/etc
-    # mount_unionfs /tmp/etc /etc
+    mkdir /tmp/etc
+    mount_unionfs /tmp/etc /etc
 
 Connectivity
 ------------
 
 .. code-block:: sh
 
-    # ifconfig em0 140.113.102.184 netmask 255.255.255.224
-    # route add default 140.113.102.190
-    # echo 'nameserver 8.8.8.8' > /tmp/etc/resolv.conf
+    ifconfig em0 140.113.102.184 netmask 255.255.255.224
+    route add default 140.113.102.190
+    echo 'nameserver 8.8.8.8' > /tmp/etc/resolv.conf
 
 SSHD on Duty
 ------------
 
 .. code-block:: sh
 
-    # passwd
-    # echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config
-    # service sshd onestart
+    passwd
+    echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config
+    service sshd onestart
 
 Remote Installation
 ===================
 
 .. code-block:: sh
 
-    # gpart destroy -F /dev/da0
-    # gpart create -s GPT /dev/da0
-    # gpart add -s 128 -t freebsd-boot -l gptboot /dev/da0
-    # gpart add -s 1G -t freebsd-swap -l gptswap /dev/da0
-    # gpart add -t freebsd-ufs -l gptroot /dev/da0
-    # gpart bootcode -b /boot/pmbr -p /boot/gptboot -i 1 /dev/da0
-    # swapon /dev/gpt/gptswap
-    # newfs -U /dev/gpt/gptroot
-    # mount /dev/gpt/gptroot /mnt
+    gpart destroy -F /dev/da0
+    gpart create -s GPT /dev/da0
+    gpart add -s 128 -t freebsd-boot -l gptboot /dev/da0
+    gpart add -s 1G -t freebsd-swap -l gptswap /dev/da0
+    gpart add -t freebsd-ufs -l gptroot /dev/da0
+    gpart bootcode -b /boot/pmbr -p /boot/gptboot -i 1 /dev/da0
+    swapon /dev/gpt/gptswap
+    newfs -U /dev/gpt/gptroot
+    mount /dev/gpt/gptroot /mnt
 
-    # tar Jxf /usr/freebsd-dist/base.txz   -C /mnt
-    # tar Jxf /usr/freebsd-dist/kernel.txz -C /mnt
-    # tar Jxf /usr/freebsd-dist/doc.txz    -C /mnt
-    # tar Jxf /usr/freebsd-dist/src.txz    -C /mnt
-    # tar Jxf /usr/freebsd-dist/lib32.txz  -C /mnt
+    tar Jxf /usr/freebsd-dist/base.txz   -C /mnt
+    tar Jxf /usr/freebsd-dist/kernel.txz -C /mnt
+    tar Jxf /usr/freebsd-dist/doc.txz    -C /mnt
+    tar Jxf /usr/freebsd-dist/src.txz    -C /mnt
+    tar Jxf /usr/freebsd-dist/lib32.txz  -C /mnt
 
-    # chroot /mnt
+    chroot /mnt
 
 .. code-block:: sh
 
-    # passwd
-    # echo 'nameserver 8.8.8.8' > /etc/resolv.conf
-    # mkdir -p /compat/linux/proc
-    # ln -s /usr/share/zoneinfo/Asia/Taipei /etc/localtime
+    passwd
+    echo 'nameserver 8.8.8.8' > /etc/resolv.conf
+    mkdir -p /compat/linux/proc
+    ln -s /usr/share/zoneinfo/Asia/Taipei /etc/localtime
 
 Edit ``/etc/rc.conf``
 
@@ -110,13 +110,13 @@ you reboot the machine
 
 .. code-block:: sh
 
-    # pw useradd starbops -G wheel -m -s /bin/sh
+    pw useradd starbops -G wheel -m -s /bin/sh
 
 Download ports tree if you want to install software through ports
 
 .. code-block:: sh
 
-    # portsnap fetch extract
+    portsnap fetch extract
 
 Conclusion
 ==========

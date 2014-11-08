@@ -29,7 +29,7 @@ Training for "return to libc" attack.
 
 Notice: libc.so is provided
 
-- ``$ objdump -d libc.so``
+- ``objdump -d libc.so``
     - 00019970 <__libc_start_main>:
     - 0003fc40 <__libc_system>:
         - offset: 262d0
@@ -38,7 +38,7 @@ Example:
 Function: libc_start_main's address is :  0xf75f5970
 Function: libc_system's address is : 0xf75f5970 + 0x262d0 = 0xf761bc40
 
-- ``$ objdump -R foo_5``
+- ``objdump -R foo_5``
     - 0804a01c R_386_JUMP_SLOT   __libc_start_main
 - 0804a02c <binsh>:
     - actual address: 08048620

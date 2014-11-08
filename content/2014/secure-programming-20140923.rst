@@ -19,9 +19,9 @@ Skill
 
 On Linux you can do the following:
 
-- ``$ file <executable>``
-- ``$ strings <executable>``
-- ``$ objdump -d <executable>``
+- ``file <executable>``
+- ``strings <executable>``
+- ``objdump -d <executable>``
 
 Also, there is a powerful tool on Windows called "IDA Pro". It can disassemble
 even decompile executables.

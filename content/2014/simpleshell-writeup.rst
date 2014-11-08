@@ -18,11 +18,11 @@ According to the hint that TA provided, this problem only need statis analysis.
     - ``strings``
     - ``objdump``
 
-By using ``$ strings simpleshell``, it shows that there are some strings in the
+By using ``strings simpleshell``, it shows that there are some strings in the
 executable. One suspicious string is "DoYouThinkThisIsPassword". Keep in mind
 and move on!
 
-Look into the assembly by ``$ objdump -M intel -d simpleshell``. But it is
+Look into the assembly by ``objdump -M intel -d simpleshell``. But it is
 ashamed that I am still not familiar with assembly though I have taken the
 course of Introduction to Assembly. Then I turned to use IDA Pro. With its
 powerful decompilation technology, I believe things will go better.
