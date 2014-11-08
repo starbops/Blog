@@ -68,7 +68,7 @@ TAGLINE = 'Sometimes, we generate bugs'
 
 # Plugins
 
-PLUGIN_PATHS = 'plugins'
+PLUGIN_PATHS = ['plugins']
 PLUGINS = ['gravatar']
 
 DISQUS_SITENAME = "zespre"
