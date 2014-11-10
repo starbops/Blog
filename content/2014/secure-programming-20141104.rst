@@ -3,6 +3,7 @@
 ====================
 
 :date: 2014-11-04 18:55
+:modified: 2014-11-10 16:00
 :tags: secprog, ctf, return-oriented-programming
 :category: note
 :slug: secure-programming-20141104
@@ -49,8 +50,10 @@ foo_6
 Training for "return-oriented programming" attack.
 
 - int 0x80
-- eax: call what
-- ebx, ecx: arguments
+- eax: call what kind of system call. See reference for Linux system call table.
+  In this problem we want to call sys_execve, so we should use "11" for eax.
+- ebx, ecx: arguments for system call. In this case we put the address of
+  "/bin/sh" which is 0x080be568 into ebx and no need of ecx.
 - remember the number of pops, smash the stack
 
 Gadget 1
@@ -110,4 +113,11 @@ terminate the input string unexpectedly.
 
     80e205d:  58                      pop    eax
     80e205e:  c3                      ret
+
+Reference
+=========
+
+- `Linux System Call Table`__
+
+.. __: http://docs.cs.up.ac.za/programming/asm/derick_tut/syscalls.html
 
