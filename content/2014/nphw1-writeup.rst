@@ -53,7 +53,7 @@ bunch of functions showed up:
 By doing some observation, I picked up three interesting functions for deeper
 inspection: ``main``, ``passCmdline``, ``splitCmdline``, ``exeCmd``.
 
-+===================+=======================================+
++-------------------+---------------------------------------+
 | Offset of cmdline | Meaning                               |
 +===================+=======================================+
 | 0                 | pointer of whole command line         |
