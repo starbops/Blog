@@ -57,7 +57,7 @@ YEAR_ARCHIVE_SAVE_AS = 'posts/{date:%Y}/index.html'
 
 # Show most recent posts first
 
-NEWEST_FIRST_ARCHIVES = False
+NEWEST_FIRST_ARCHIVES = True
 
 # Specify theme
 
