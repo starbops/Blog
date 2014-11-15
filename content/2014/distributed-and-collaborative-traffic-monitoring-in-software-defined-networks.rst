@@ -4,7 +4,7 @@
 
 :date: 2014-10-25 14:00
 :modified: 2014-10-27 10:22
-:tags: winlab, paper
+:tags: winlab, paper, sdn
 :category: note
 :slug: distributed-and-collaborative-traffic-monitoring-in-software-defined-networks
 :authors: Zespre Schmidt
