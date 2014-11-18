@@ -104,7 +104,7 @@ Exploitation
 ============
 
 The first word should be the same as the last word, and the shellcode should be
- 1004th word. That's all!
+1004th word. That's all!
 
 .. code-block:: python
 
