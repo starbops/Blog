@@ -3,7 +3,7 @@
 ===============================================================================
 
 :date: 2014-10-25 14:00
-:modified: 2014-10-27 10:22
+:modified: 2014-11-20 20:49
 :tags: winlab, paper, sdn
 :category: note
 :slug: distributed-and-collaborative-traffic-monitoring-in-software-defined-networks
@@ -138,3 +138,10 @@ Controller Operations
     - The controller can maintain copies of Bloom filters installed on switches and the record of flow information
         - Detect all false positives
         - Limit the negative influence of them
+
+Reference
+=========
+
+- `Distributed and Collaborative Traffic Monitoring in Software Defined Networks`__
+
+.. __: http://conferences.sigcomm.org/sigcomm/2014/doc/slides/197.pdf
