@@ -3,6 +3,7 @@
 ==========================================
 
 :date: 2014-11-26 23:51
+:modified: 2014-11-27 03:25
 :tags: linux, ubuntu, sysadm, kernel
 :category: memo
 :slug: ubuntu-apt-cron-cache-has-broken-packages
@@ -55,7 +56,7 @@ packages by using ``dpkg``
 .. code-block:: bash
 
     # dpkg -l 'linux-*' | sed '/^ii/!d;/'"$(uname -r | sed "s/\(.*\)-\([^0-9]\+\)/\1/")"'/d;s/^[^ ]* [^ ]* \([^ ]*\).*/\1/;/[0-9]/!d' | xargs sudo apt-get -y purge
-    
+
 After seeing this, I gave it a try but failed with the dependency warning. The
 warning said that I must install "linux-headers-3.2.0-72" because
 "linux-headers-3.2.0-72-generic" needs it. So I install the dependency according
@@ -86,8 +87,10 @@ Now we can install the dependencies by ``sudo apt-get -f install linux-headers-3
 
 After the dependencies were installed, we can remove all the previous kernel
 images, headers and modules, leaving only the current one intact. Using the one
-liner specified in last section will do the trick. After all, our precious disk
-space is returned!
+liner specified in last section will do the trick. (But it is important that the
+machine should reboot before purging the old kernel images. If you did not
+reboot, next time rebooting the machine will fail because it cannot find the
+kernel image.) After all, our precious disk space is returned!
 
 To prove that our work does solve the original problem, we simply run the cron
 job manually:
