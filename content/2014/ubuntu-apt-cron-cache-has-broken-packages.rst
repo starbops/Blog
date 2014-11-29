@@ -10,7 +10,7 @@
 :authors: Zespre Schmidt
 :about_author: Bug generator
 :email: starbops@gmail.com
-:summary:
+:summary: One day I received an root mail from my machine, talking about some packages are broken in the cache. The investigation begins...
 
 Problem Encountered
 ===================
