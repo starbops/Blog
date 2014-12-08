@@ -3,6 +3,7 @@
 =============================
 
 :date: 2014-10-22 19:43
+:modified: 2014-12-08 15:00
 :tags: freebsd
 :category: memo
 :slug: freebsd-remote-install
@@ -67,7 +68,8 @@ Remote Installation
 
     passwd
     echo 'nameserver 8.8.8.8' > /etc/resolv.conf
-    mkdir -p /compat/linux/proc
+    mkdir -p /usr/compat/linux/proc
+    ln -s /usr/compat /compat
     ln -s /usr/share/zoneinfo/Asia/Taipei /etc/localtime
 
 Edit ``/etc/rc.conf``
