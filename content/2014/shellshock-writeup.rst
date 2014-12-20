@@ -3,6 +3,7 @@
 ====================
 
 :date: 2014-12-16 15:35
+:modified: 2014-12-21 01:20
 :tags: secprog, sqlite, sqli, shellshock, writeup
 :category: memo
 :slug: shellshock-writeup
@@ -139,10 +140,11 @@ References
 - `Select Queries`__
 - `SQLite 3 error-based injection`__
 - `SQLite3 Injection Cheat Sheet`__
+- `SQLite Injection | Hits from the bits`__
 
 .. _ShellShock Tester: http://tor.atdog.tw:8888/index.php
 .. _Flask: http://flask.pocoo.org
 .. __: http://sqlite.awardspace.info/syntax/sqlitepg03.htm
 .. __: https://rdot.org/forum/showthread.php?p=26419
 .. __: http://atta.cked.me/home/sqlite3injectioncheatsheet
-
+.. __: http://gwae.trollab.org/sqlite-injection.html
