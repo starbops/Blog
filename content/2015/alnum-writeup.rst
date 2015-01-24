@@ -1,5 +1,5 @@
 ================
- alnum Write Up
+ alnum Writeup
 ================
 
 :date: 2015-01-21 02:15
