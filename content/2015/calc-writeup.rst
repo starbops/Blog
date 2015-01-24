@@ -86,7 +86,7 @@ is ``stack[0]``. And ``top`` will always be 1. In ``calc()``, the value of
 
 .. code-block:: c
 
-    printf((const char \*)&unk_80BF804, pool.stack[(unsigned int)((char \*)pool.top - 1)]);
+    printf((const char *)&unk_80BF804, pool.stack[(unsigned int)((char *)pool.top - 1)]);
 
 There seems no boundary checking on ``top``. By this property, memory leaking
 could also be possible.
@@ -97,7 +97,7 @@ modify variable which is right before the array.
 
 .. code-block:: c
 
-    p->stack[(unsigned int)((char \*)p->top - 2)] += p->stack[(unsigned int)((char \*)p->top - 1)];
+    p->stack[(unsigned int)((char *)p->top - 2)] += p->stack[(unsigned int)((char *)p->top - 1)];
 
 But how to use this? We all know that the most of operators acceptable in this
 calculator are in the category of "binary operators". Which means there must be
