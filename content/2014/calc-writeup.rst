@@ -49,7 +49,7 @@ Look into The Program
 The binary has five main functions:
 
 - ``calc()``: Main loop of the calculator
-- ``get_expr()``: Only allow specific character set ([+-*/%0-9]) to be written
+- ``get_expr()``: Only allow specific character set ([+-\*/%0-9]) to be written
   into the buffer
 - ``init_pool()``: Write zeros into the pool, trivial
 - ``parse_expr()``: Poorly written parser
@@ -167,7 +167,7 @@ Shellcode
 First idea comes to my mind was putting shellcode in stack buffer. But
 shellcode in ``stack[100]`` will not work because every time a new round in
 while loop begins, the ``stack[100]`` will be re-initialized. And the raw input
-we typed will be filetered (only [+-*/%0-9]), then saved into ``str[1024]``. So
+we typed will be filetered (only [+-\*/%0-9]), then saved into ``str[1024]``. So
 storing shellcode in ``str[1024]`` is not possible, either.
 
 Return to LIBC

