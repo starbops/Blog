@@ -3,7 +3,7 @@
 ================
 
 :date: 2014-11-27 18:00
-:modified: 2014-12-17 01:31
+:modified: 2015-01-25 11:20
 :tags: secprog, ctf, writeup
 :category: memo
 :slug: notweb-writeup
@@ -15,10 +15,12 @@
 Finding Weak Points
 ===================
 
-使用 gdb 進行 dynamic analysis 發現 ``main()`` 會 call ``get_request()`` ，下斷
-點在 call ``get_request()`` 的地方 step in 進去一步一步看。程式呼叫 ``fgets()``
-讀取 input，並會以 ``strtok()`` 根據空白來截斷字串。若整個 string 只有一個 word
-的話會 call exit 程式結束，否則繼續執行下去。
+After using gdb to do the dynamic analysis, I found that function ``main()``
+will call function ``get_request()``. So I set the break point at the line
+which calls ``get_request()`` and check it out step by step. The program calls
+``fgets()`` to get the input, and using ``strtok()`` to chop the string
+according to the spaces. If the whold string only consists of one single word,
+it calls exit to terminate the program. Otherwise the program will go on.
 
 .. code-block:: nasm
 
@@ -28,7 +30,8 @@ Finding Weak Points
     08048a5a:       c7 04 24 00 00 00 00    mov    DWORD PTR [esp],0x0
     08048a61:       e8 ea fb ff ff          call   8048650 <exit@plt>
 
-``buf`` 吃進一行所有 input，並依序依照 ' ' 和 ':' 來截斷各個 token，示意圖如下：
+The variable ``buf`` sucks in the whole line of input then splits the input
+into tokens according to space and colon. A diagram is showed below:
 
 .. code-block:: text
 
@@ -37,61 +40,62 @@ Finding Weak Points
     GET /echo:%x%x%x%x%x
     |   |     |
     |   |     v
-    |   v     被存入 ``main()`` 中的 local variable，在此以 ``s`` 作為範例
-    v   字串長度為 5，第一個字元後被存入 global ``file``
-    被捨棄
+    |   v     stored in local variable in ``main()``, using ``s`` as example
+    v   length of the string is 5, the first character is stored in ``file``
+    abandoned
 
-此外在 ``echo()`` 中看到又 ``printf(buf)`` 這樣的 code，可利用 format string
-leak 任意 memory 甚至寫值進去。
-
-xxx yyy:zzz
-
-yyy <= 19: filename
-zzz 可以 100000 長
-
-0x0804b140: <buf>
-0x080637e0: <file>
+And there is a piece of code that contains ``printf(buf)`` in the function
+``echo()``. With this, exploiting the vulnerability of format string to leak
+arbitrary memory is easy. Even write some values into memory could be possible.
 
 Weird Filter
 ============
 
-在 ``get_request()`` 中，return 前會將 global ``buf`` 前 n 個字元清空，導致在
-``filter_format()`` 中的第二個 for loop 不會有效果。因為 global ``buf`` 前段早已
-被清為 0，一開始字串長度判定是 0，馬上離開 for loop。因此 global ``buf`` 維持原
-樣，'%' 不會被替換為 '_'。
+In ``get_request()``, the first n bytes of global variable ``buf`` will be
+eliminated before return. This will make the second for loop in
+``filter_format()`` has no effect. Because the first n bytes of global variable
+``buf`` are already been cleared with zeros, the length of the string is zero.
+Thus the for loop will ended up immediately. As a result, the global ``buf``
+remains, '%' is not replaced with '_'.
 
-在 ``echo()`` 中，呼叫完 ``filter_format()`` 後，會將 ':' 後的字串（'%' 已被替換
-成 '_'）複製到 global ``buf`` 的前段，導致可能覆蓋到 global ``buf`` 中  ':' 後的
-字串（'%' 未被替換為 '_'），因此若要利用 format string 來進行 exploit 的話，需要
-額外的計算以確保目標 string 不被程式破壞。
+In function ``echo()``, after calling ``filter_format()``, the string which is
+after ':' ('%' have already been replaced with '_') will be copied to the front
+end of the global variable ``buf``. This could make the string which is after
+':' of the global variable ``buf`` ('%' are not replaced with '_') being
+overlaped. So extra calculation must be taken to assure the target string not
+being messed, if someone want to exploit the program using format string.
 
-根據上述所提供的範例輸入字串，在 ``echo()`` 中執行 ``printf(buf)`` 前 global
-``buf`` 的值會是：
+According to the example string which is entered into the program, the value in
+the global variable ``buf`` before calling ``printf(buf)`` in function
+``echo()`` is:
 
 .. code-block:: text
 
     _x_x_x_x_x\nx%x%x%x%x\n
 
-印出來的的結果會是：
+The result showed up is:
 
 .. code-block:: text
 
     _x_x_x_x_x
     xfffe4f4cbf7f4b3d00
 
-如果 ':' 後的字串長度（包含 '\n'）長度剛好是 10 的話，可以蓋到 ':' 那格（':' 因
-``strtok`` 而被置換為 string terminator），如此一來字串又可以重新連成一氣，':'
-後面即是我們原本的 format string。
+If the length of the string after ':' (including '\n') is exactly 10, it can
+overwrite the byte which contains ':' (':' is replaced with string terminator
+because of ``strtok``). In the end, the whole string is connected again, rear
+part is our original format string.
 
-若長度不足 10 的話，就在 ':' 與 format string 之間補字元（內容不重要），確保可以
-重新把 global ``buf`` 接起來：
+Padding some trival characters between ':' and the format string to ensure to
+connect the global variable ``buf`` again, if the lenth of the string is less
+than 10.
 
 .. code-block:: text
 
     GET /echo:aaaaaaa%p
 
-長度大於 10 的字串，必須要在 input 最前面補上多出來的部分（內容不重要），才不會
-蓋到後面的 format string：
+For the string which is longer than 10, one must pad some trival characters to
+make sure the format string won't be covered by something useless by the
+fxxking program logic.
 
 .. code-block:: text
 
@@ -100,19 +104,27 @@ Weird Filter
 Objective
 =========
 
-在 ``echo()`` 中它的 return address 位於 $esp+0x1c，也就是用 ``%7$p`` 可以 leak
-return address（當然要補滿到 10 個字元）。我們的目標是改寫這裏的 address
-（0x0804917f）成 ``normal_file()`` 的 address（0x08048c8f）。除此之外 global
-``file`` 的內容也要改成 "flag"，如此以來 ``normal_file()`` 才能開啟 flag 並且讀
-取內容。但事情並沒有想像中的那般單純，因為 remote 端有開啟 ASLR，因此 return
-address 實際上在 stack 中的位置我們是無法得知的，就無法透過 format string 的方式
-寫值。
+The return address is at ``$esp+0x1c`` in ``echo()``, that is to say, using
+``%7$p`` could leak the return address (of course the length must be at least
+10 characters). Our objective is to modify the address (0x0804917f) with the
+address of function ``normal_file()`` (0x08048c8f). Besides, the content of the
+global variable ``file`` should be "flag". With all of this, the function
+``normal_file()`` can have the ability of opening the file of the flag and
+reading that file. The gods send nut to those who have no teeth, the server
+side has already enabled ASLR, so we cannot know the location of the return
+address in the stack. Thus, exploitation using format string to overwrite the
+return address in the stack is not practical.
 
-Return address 無法修改，但其實還有別的方法可以控制 $eip，就是運用 GOT table。
-``fflush()`` 在 GOT table 中的 offset 為 0x804b018 其內容為 ``fflush()`` 實際所
-在的位置（0xf7e78760）。只要將 ``fflush()`` 所在位置移花接木到 ``normal_file()``
-即可。但在實測後發現 ``normal_file()`` 中也有 ``fflush()`` ，這將導致無窮遞迴。
-改用 ``exit()`` 即可避免。 ``exit()`` 在 GOT table 中的 offset 為 0x0804b03c。
+However, there's another way to control the ``eip`` though the return address
+cannot be modified. The Global Offset Table (GOT) might be a good candidate.
+The offset of the function ``fflush()`` in the GOT is 0x0804b018. The content
+in that is the actual position of ``fflush()`` (0xf7e78760) after GLIBC was
+dynamically loaded into the program. So we just have to replace the address
+with the address of ``normal_file()``. But again, the gods send nut to those
+who have no theeth, there is a ``fflush()`` in the function ``normal_file()``.
+So doing this will cause an endless loop. A better choice is to modify the
+address of the function ``exit()`` in the GOT to avoid that. The offset of the
+function ``exit()`` in the GOT is 0x0804b03c.
 
 .. code-block:: bash
 
@@ -148,13 +160,15 @@ Return address 無法修改，但其實還有別的方法可以控制 $eip，就
      0804b058  00001407 R_386_JUMP_SLOT   00000000   strtok
      0804b05c  00001507 R_386_JUMP_SLOT   00000000   sprintf
 
-除了控制 $eip 以外，還有 global variable ``file`` 需要將其值改寫為 "flag"。
+Besides controlling the ``eip``, the global variable ``file`` should be set to
+the string "flag", too.
 
 Exploitation
 ============
 
-關鍵在於如何同時設計好 payload 又可以完美的不被程式的 filter 給破壞掉原本的
-format string。 以下為 exploit 程式的主要片段。
+The key point is that how to design the payload and keep the original format
+string from destroying by the filter. The following is the main part of the
+exploitation code.
 
 .. code-block:: python
 
