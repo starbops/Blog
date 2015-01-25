@@ -18,6 +18,8 @@ Problem Description
 In the Hack.lu CTF website, there are some description about "Gunslinger Joe's
 private Terminal":
 
+.. code-block:: text
+
     Gunslinger Joe's private Terminal
     by cutz (Misc)
     50 (+20) Points
@@ -91,12 +93,13 @@ executable in the ``/bin``.
 
 Oops! WTF! It seems that the file ``/bin/bashbug`` has been executed. And we
 finally got an editor, which is ``vim``.
+
 .. code-block:: text
 
     From: gunslinger_joe
     To: ../../bin/bunzip2
     Subject: [50 character or so descriptive subject here (for reference)]
-     
+
     Configuration Information [Automatically generated, do not change]:
     Machine: x86_64
     OS: linux-gnu
@@ -108,18 +111,18 @@ finally got an editor, which is ``vim``.
     uname output: Linux terminal 3.13.0-37-generic #64-Ubuntu SMP Mon Sep 22
     21:28:38 UTC 2014 x86_64 x86_64 x86_64 GNU/Linux
     Machine Type: x86_64-unknown-linux-gnu
-     
+
     Bash Version: 4.3
     Patch Level: 30
     Release Status: release
-     
+
     Description:
             [Detailed description of the problem, suggestion, or complaint.]
-     
+
     Repeat-By:
             [Describe the sequence of events that causes the problem
             to occur.]
-     
+
     Fix:
             [Description of how to fix the problem.  If you don't know a
             fix for the problem, don't include this section.]
