@@ -4,7 +4,7 @@
 
 :date: 2014-12-25 19:35
 :modified: 2015-02-06 02:21
-:tags: freebsd, nis, nfs, automount
+:tags: freebsd, nis, nfs, automount, syslog
 :category: memo
 :slug: freebsd-nis-nfs
 :authors: Zespre Schmidt
